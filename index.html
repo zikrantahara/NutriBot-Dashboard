@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriBot Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>NUTRIBOT - DASHBOARD MONITORING</h1>
+    </header>
+
+    <main class="grid-container">
+        
+        <!-- PANEL 1: VOLUME AIR -->
+        <div class="card">
+            <h2>Volume Air</h2>
+            <div class="tangki-air">
+                <div class="gelombang-air" id="animasi-air"></div>
+                <div class="persentase" id="teks-volume-air">0%</div>
+            </div>
+        </div>
+
+        <!-- PANEL 2: NUTRISI & SUHU -->
+        <div class="card">
+            <h2>Parameter Nutrisi & Suhu</h2>
+            
+            <!-- Notifikasi Merah -->
+            <div id="notif-nutrisi" class="alert-merah">
+                ⚠️ PERINGATAN: Cairan Nutrisi Habis!
+            </div>
+
+            <div class="flex-dua-kolom">
+                <!-- Tabung Nutrisi -->
+                <div class="item-tengah">
+                    <div class="tabung-nutrisi">
+                        <div class="isi-nutrisi" id="animasi-nutrisi"></div>
+                        <div class="teks-nutrisi-center" id="teks-level-nutrisi">100%</div>
+                    </div>
+                    <p class="label-kecil">Level AB Mix</p>
+                </div>
+
+                <!-- Lingkaran Suhu -->
+                <div class="item-tengah">
+                    <div class="cincin-suhu">
+                        <span id="teks-suhu">28</span><span class="satuan">°C</span>
+                    </div>
+                    <p class="label-kecil">Suhu Air</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 3: KONTROL MANUAL (TOGGLE SWITCH) -->
+        <div class="card">
+            <h2>Kontrol Manual Aktuator</h2>
+            
+            <div class="switch-group">
+                <span>Pompa AB Mix</span>
+                <label class="switch">
+                    <input type="checkbox" id="pompa-ab">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="switch-group">
+                <span>Pompa pH Up</span>
+                <label class="switch">
+                    <input type="checkbox" id="pompa-ph-up">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="switch-group">
+                <span>Pompa pH Down</span>
+                <label class="switch">
+                    <input type="checkbox" id="pompa-ph-down">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- PANEL 4: GRAFIK pH -->
+        <div class="card">
+            <h2>Riwayat Parameter pH</h2>
+            <canvas id="grafikRiwayat"></canvas>
+        </div>
+
+    </main>
+
+    <!-- Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
