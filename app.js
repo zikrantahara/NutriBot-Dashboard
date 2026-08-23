@@ -10,29 +10,25 @@ const firebaseConfig = {
     messagingSenderId: "952588165077",
     appId: "1:952588165077:web:807b6aaaec368e0e09e75c"
 };
-firebase.initializeApp(firebaseConfig);
+
+// Cek agar Firebase tidak dipanggil dua kali
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
 const db = firebase.database();
 
-const mqttClient = new Paho.MQTT.Client("broker.hivemq.com", 8884, "NutriBot_Web_" + parseInt(Math.random() * 1000));
+// Inisialisasi MQTT murni dengan SATU kali pemanggilan Secure WebSocket (WSS)
+const mqttClient = new Paho.MQTT.Client("broker.hivemq.com", 8884, "NutriBot_Web_" + parseInt(Math.random() * 10000));
 
-// Tambahkan logika pengecekan agar tidak connect dua kali
-function mulaiKoneksiMQTT() {
-    // Hanya lakukan koneksi jika statusnya BELUM terkoneksi
-    if (!mqttClient.isConnected()) {
-        console.log("Menghubungkan ke MQTT Server...");
-        mqttClient.connect({ 
-            useSSL: true,
-            onSuccess: () => console.log("MQTT Kontrol Aktuator Ready! (Secure)")
-        });
-    } else {
-        console.log("MQTT sudah terhubung, membatalkan koneksi ulang.");
+mqttClient.connect({
+    useSSL: true,
+    onSuccess: function() {
+        console.log("✅ MQTT Kontrol Aktuator Ready! (Secure WSS)");
+    },
+    onFailure: function(err) {
+        console.log("❌ Gagal connect MQTT: " + err.errorMessage);
     }
-}
-
-// Panggil fungsinya
-mulaiKoneksiMQTT();
-
-mqttClient.connect({ onSuccess: () => console.log("MQTT Kontrol Aktuator Ready!") });
+});
 
 
 // ==========================================
@@ -43,7 +39,7 @@ const chartRiwayat = new Chart(ctxRiwayat, {
     type: 'line',
     data: {
         labels: [], datasets: [{
-            label: 'Nilai pH Air', data: [], 
+            label: 'Nilai pH Air', data: [],
             borderColor: '#00d2ff', backgroundColor: 'rgba(0, 210, 255, 0.2)',
             borderWidth: 2, tension: 0.4, fill: true
         }]
@@ -57,7 +53,7 @@ const chartRiwayat = new Chart(ctxRiwayat, {
 
 
 // ==========================================
-// 2. MENDENGARKAN SENSOR DARI FIREBASE (Anti-Amnesia)
+// 2. MENDENGARKAN SENSOR DARI FIREBASE
 // ==========================================
 db.ref('NutriBot_Node1/sensor_aktual/volume_air_persen').on('value', (snapshot) => {
     const val = snapshot.val() || 0;
@@ -69,7 +65,10 @@ db.ref('NutriBot_Node1/sensor_aktual/level_nutrisi_persen').on('value', (snapsho
     const val = snapshot.val() || 0;
     document.getElementById('teks-level-nutrisi').innerText = val + '%';
     document.getElementById('animasi-nutrisi').style.height = val + '%';
-    document.getElementById('notif-nutrisi').style.display = val < 10 ? 'block' : 'none';
+    
+    // Cegah error jika elemen notifikasi tidak ada di HTML
+    const notif = document.getElementById('notif-nutrisi');
+    if(notif) notif.style.display = val < 10 ? 'block' : 'none';
 });
 
 db.ref('NutriBot_Node1/sensor_aktual/suhu_air').on('value', (snapshot) => {
@@ -84,8 +83,8 @@ db.ref('NutriBot_Node1/sensor_aktual/ph_air').on('value', (snapshot) => {
     chartRiwayat.data.datasets[0].data.push(nilaiPH);
 
     if (chartRiwayat.data.labels.length > 8) {
-        chartRiwayat.data.labels.shift(); 
-        chartRiwayat.data.datasets[0].data.shift(); 
+        chartRiwayat.data.labels.shift();
+        chartRiwayat.data.datasets[0].data.shift();
     }
     chartRiwayat.update();
 });
@@ -95,13 +94,12 @@ db.ref('NutriBot_Node1/sensor_aktual/ph_air').on('value', (snapshot) => {
 // 3. MENGIRIM KONTROL KE MQTT & FIREBASE
 // ==========================================
 function kendalikanPompa(topicMqtt, nodeFirebase, statusAktif) {
-    // 1. Tembak langsung ke ESP32 agar cepat
     if (mqttClient.isConnected()) {
         const pesan = new Paho.MQTT.Message(statusAktif ? "true" : "false");
         pesan.destinationName = topicMqtt;
         mqttClient.send(pesan);
+        console.log("Perintah Cepat Terkirim ke MQTT: " + topicMqtt);
     }
-    // 2. Simpan status di Firebase agar ingat saat di-refresh
     db.ref(`NutriBot_Node1/status_pompa/${nodeFirebase}`).set(statusAktif);
     db.ref('NutriBot_Node1/kontrol_sistem/mode_manual').set(true);
 }
