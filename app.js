@@ -13,7 +13,15 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-const mqttClient = new Paho.MQTT.Client("broker.hivemq.com", 8000, "NutriBot_Web_" + parseInt(Math.random() * 1000));
+// Gunakan Port 8884 untuk jalur Secure WebSocket (WSS)
+const mqttClient = new Paho.MQTT.Client("broker.hivemq.com", 8884, "NutriBot_Web_" + parseInt(Math.random() * 1000));
+
+// Tambahkan konfigurasi koneksi SSL
+mqttClient.connect({ 
+    useSSL: true, // Wajib bernilai true untuk koneksi HTTPS Netlify
+    onSuccess: () => console.log("MQTT Kontrol Aktuator Ready! (Secure)") 
+});
+
 mqttClient.connect({ onSuccess: () => console.log("MQTT Kontrol Aktuator Ready!") });
 
 
