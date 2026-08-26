@@ -213,3 +213,32 @@ input:checked + .slider:before { transform: translateX(24px); }
 input:checked + .switch-besar .slider:before {
     transform: translateX(30px);
 }
+
+/* --- INDIKATOR STATUS ONLINE/OFFLINE --- */
+.status-koneksi {
+    text-align: center;
+    margin-top: -20px;
+    margin-bottom: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.dot-online {
+    height: 12px; width: 12px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px #22c55e;
+}
+.dot-offline {
+    height: 12px; width: 12px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px #ef4444;
+    animation: kedip 1.5s infinite;
+}

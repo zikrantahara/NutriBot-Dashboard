@@ -32,7 +32,35 @@ mqttClient.connect({
 
 
 // ==========================================
-// 1. GRAFIK RIWAYAT pH (LINE CHART)
+// 1. FUNGSI WATCHDOG / STATUS KONEKSI ESP32
+// ==========================================
+let timerKoneksi; // Variabel untuk menyimpan timer
+
+function perbaruiStatusKoneksi() {
+    const indikator = document.getElementById('indikator-status');
+    const teksStatus = document.getElementById('teks-status');
+
+    if (indikator && teksStatus) {
+        // Ubah ke status Online hijau saat ada data masuk
+        indikator.className = 'dot-online';
+        teksStatus.innerText = 'ESP32 Aktif & Terhubung (Online)';
+        teksStatus.style.color = '#22c55e';
+
+        // Hapus timer lama
+        clearTimeout(timerKoneksi);
+
+        // Set timer baru: Jika 15 detik tidak ada data baru, ubah ke Offline
+        timerKoneksi = setTimeout(() => {
+            indikator.className = 'dot-offline';
+            teksStatus.innerText = 'ESP32 Terputus / Mati (Offline)';
+            teksStatus.style.color = '#ef4444';
+        }, 15000);
+    }
+}
+
+
+// ==========================================
+// 2. GRAFIK RIWAYAT pH (LINE CHART)
 // ==========================================
 const ctxRiwayat = document.getElementById('grafikRiwayat').getContext('2d');
 const chartRiwayat = new Chart(ctxRiwayat, {
@@ -53,12 +81,14 @@ const chartRiwayat = new Chart(ctxRiwayat, {
 
 
 // ==========================================
-// 2. MENDENGARKAN SENSOR DARI FIREBASE
+// 3. MENDENGARKAN SENSOR DARI FIREBASE
 // ==========================================
 db.ref('NutriBot_Node1/sensor_aktual/volume_air_persen').on('value', (snapshot) => {
     const val = snapshot.val() || 0;
     document.getElementById('teks-volume-air').innerText = val + '%';
     document.getElementById('animasi-air').style.top = (100 - val) + '%';
+    
+    perbaruiStatusKoneksi(); // 👉 Pemicu Watchdog
 });
 
 db.ref('NutriBot_Node1/sensor_aktual/level_nutrisi_persen').on('value', (snapshot) => {
@@ -69,10 +99,14 @@ db.ref('NutriBot_Node1/sensor_aktual/level_nutrisi_persen').on('value', (snapsho
     // Cegah error jika elemen notifikasi tidak ada di HTML
     const notif = document.getElementById('notif-nutrisi');
     if(notif) notif.style.display = val < 10 ? 'block' : 'none';
+    
+    perbaruiStatusKoneksi(); // 👉 Pemicu Watchdog
 });
 
 db.ref('NutriBot_Node1/sensor_aktual/suhu_air').on('value', (snapshot) => {
     document.getElementById('teks-suhu').innerText = snapshot.val() || 0;
+    
+    perbaruiStatusKoneksi(); // 👉 Pemicu Watchdog
 });
 
 db.ref('NutriBot_Node1/sensor_aktual/ph_air').on('value', (snapshot) => {
@@ -87,11 +121,13 @@ db.ref('NutriBot_Node1/sensor_aktual/ph_air').on('value', (snapshot) => {
         chartRiwayat.data.datasets[0].data.shift();
     }
     chartRiwayat.update();
+    
+    perbaruiStatusKoneksi(); // 👉 Pemicu Watchdog
 });
 
 
 // ==========================================
-// 3. MENGIRIM KONTROL KE MQTT & FIREBASE
+// 4. MENGIRIM KONTROL KE MQTT & FIREBASE
 // ==========================================
 function kendalikanPompa(topicMqtt, nodeFirebase, statusAktif) {
     if (mqttClient.isConnected()) {
