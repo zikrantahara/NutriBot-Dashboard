@@ -51,18 +51,28 @@
             </div>
         </div>
 
-        <!-- PANEL 3: KONTROL MANUAL (TOGGLE SWITCH) -->
-        <div class="card">
-            <h2>Kontrol Manual Aktuator</h2>
-            
-            <div class="switch-group">
-                <span>Pompa AB Mix</span>
-                <label class="switch">
-                    <input type="checkbox" id="pompa-ab">
-                    <span class="slider"></span>
-                </label>
+        <!-- PANEL 3: KONTROL MANUAL (RE-DESIGN) -->
+        <div class="card panel-kontrol">
+            <h2>Kontrol Manual</h2>
+            <div class="kontrol-wrapper">
+                <div class="ikon-pompa">
+                    <!-- Ikon Tetesan Air / Pompa -->
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    </svg>
+                </div>
+                <h3>Pompa AB Mix</h3>
+                <p class="deskripsi-kontrol">Kendali bypass (pengabaian sensor) untuk aktuator nutrisi.</p>
+                
+                <div class="switch-container">
+                    <span class="label-off">OFF</span>
+                    <label class="switch switch-besar">
+                        <input type="checkbox" id="pompa-ab">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="label-on">ON</span>
+                </div>
             </div>
-            
         </div>
 
         <!-- PANEL 4: GRAFIK pH -->
@@ -79,7 +89,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
     
-    <!-- Pemanggilan script dengan Cache Busting versi 3.0 -->
-    <script src="app.js?v=3.0"></script>
+    <!-- Naikkan versi cache busting agar langsung berubah -->
+    <script src="app.js?v=4.0"></script>
 </body>
 </html>
