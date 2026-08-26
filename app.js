@@ -43,7 +43,7 @@ function perbaruiStatusKoneksi() {
     if (indikator && teksStatus) {
         // Ubah ke status Online hijau saat ada data masuk
         indikator.className = 'dot-online';
-        teksStatus.innerText = 'ESP32 Aktif & Terhubung (Online)';
+        teksStatus.innerText = 'ESP32 Connected';
         teksStatus.style.color = '#22c55e';
 
         // Hapus timer lama
@@ -52,7 +52,7 @@ function perbaruiStatusKoneksi() {
         // Set timer baru: Jika 15 detik tidak ada data baru, ubah ke Offline
         timerKoneksi = setTimeout(() => {
             indikator.className = 'dot-offline';
-            teksStatus.innerText = 'ESP32 Terputus / Mati (Offline)';
+            teksStatus.innerText = 'ESP32 Disconnected';
             teksStatus.style.color = '#ef4444';
         }, 15000);
     }
