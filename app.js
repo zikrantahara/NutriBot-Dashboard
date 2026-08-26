@@ -107,9 +107,3 @@ function kendalikanPompa(topicMqtt, nodeFirebase, statusAktif) {
 document.getElementById('pompa-ab').addEventListener('change', (e) => {
     kendalikanPompa("nutribot/kontrol/pompa_ab", "pompa_AB_Mix", e.target.checked);
 });
-document.getElementById('pompa-ph-up').addEventListener('change', (e) => {
-    kendalikanPompa("nutribot/kontrol/pompa_ph_up", "pompa_pH_Up", e.target.checked);
-});
-document.getElementById('pompa-ph-down').addEventListener('change', (e) => {
-    kendalikanPompa("nutribot/kontrol/pompa_ph_down", "pompa_pH_Down", e.target.checked);
-});
