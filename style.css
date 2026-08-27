@@ -173,7 +173,6 @@ h2 {
 .cincin-tds { border-color: #a855f7; color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
 .cincin-suhu .satuan { font-size: 18px; vertical-align: super; margin-left: 2px;}
 
-
 /* =========================================
    KONTROL MANUAL (Grid 2 Pompa)
 ========================================= */
@@ -209,8 +208,9 @@ h2 {
 }
 .switch-besar { width: 50px; height: 26px; }
 .switch-besar .slider:before { height: 18px; width: 18px; left: 4px; bottom: 4px; }
-input:checked + .switch-besar .slider { background-color: #00d2ff; }
-input:checked + .switch-besar .slider:before { transform: translateX(24px); }
+
+input:checked + .slider { background-color: #00d2ff; }
+input:checked + .slider:before { transform: translateX(24px); }
 
 /* =========================================
    ANIMASI KEYFRAMES
