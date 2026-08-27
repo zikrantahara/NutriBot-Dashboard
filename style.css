@@ -1,3 +1,6 @@
+/* =========================================
+   DASAR & TIPOGRAFI
+========================================= */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #12181f;
@@ -9,215 +12,15 @@ body {
 header h1 {
     text-align: center;
     color: #00d2ff;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
-.grid-container {
-    display: grid;
-    /* Grid akan otomatis menyesuaikan diri. 2 kolom di PC, 1 kolom di HP */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background-color: #1e2630;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-}
-
-h2 {
-    border-bottom: 1px solid #334155;
-    padding-bottom: 10px;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 0;
-}
-
-/* --- ANIMASI TANGKI AIR (Biru) --- */
-.tangki-air {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 6px solid #2cb1ff;
-    background-color: #0f172a;
-    overflow: hidden;
-    margin: 20px auto;
-    box-shadow: 0 0 20px rgba(44, 177, 255, 0.2);
-}
-.tangki-air .persentase {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 42px; font-weight: bold;
-    z-index: 10; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-.gelombang-air {
-    position: absolute;
-    width: 250%; height: 250%;
-    background-color: #2cb1ff; 
-    left: -75%; top: 100%;
-    border-radius: 40%;
-    animation: putar 5s infinite linear;
-    transition: top 1.5s ease-in-out;
-    z-index: 1;
-}
-.gelombang-air::before {
-    content: ""; position: absolute;
-    width: 100%; height: 100%;
-    background-color: rgba(44, 177, 255, 0.4);
-    left: 0; top: -15px;
-    border-radius: 42%;
-    animation: putar 7s infinite linear;
-}
-
-/* --- TABUNG NUTRISI (Hijau) --- */
-.flex-dua-kolom {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 20px;
-}
-.item-tengah { text-align: center; }
-.label-kecil { color: #94a3b8; font-size: 14px; margin-top: 15px; font-weight: bold; }
-
-.tabung-nutrisi {
-    width: 70px;
-    height: 160px;
-    background-color: #0f172a;
-    border: 4px solid #22c55e;
-    border-radius: 35px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
-}
-.isi-nutrisi {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(to top, #16a34a, #4ade80);
-    transition: height 1.5s ease-in-out;
-}
-.teks-nutrisi-center {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold; z-index: 2;
-    text-shadow: 1px 1px 3px black;
-    font-size: 18px;
-}
-
-/* --- CINCIN SUHU (Kuning) --- */
-.cincin-suhu {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: #0f172a;
-    border: 4px solid #facc15;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 38px; font-weight: bold;
-    color: #facc15;
-    box-shadow: 0 0 15px rgba(250, 204, 21, 0.2);
-}
-.cincin-suhu .satuan { font-size: 20px; vertical-align: super; margin-left: 2px;}
-
-/* --- TOGGLE SWITCH MODERN (Default) --- */
-.switch-group {
-    display: flex; justify-content: space-between; align-items: center;
-    margin: 15px 0; padding: 12px 20px;
-    background: #0f172a; border-radius: 8px; font-weight: bold;
-}
-.switch { position: relative; display: inline-block; width: 50px; height: 26px; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider {
-    position: absolute; cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #334155; transition: .4s; border-radius: 34px;
-}
-.slider:before {
-    position: absolute; content: "";
-    height: 18px; width: 18px;
-    left: 4px; bottom: 4px;
-    background-color: white; transition: .4s; border-radius: 50%;
-}
-input:checked + .slider { background-color: #00d2ff; }
-input:checked + .slider:before { transform: translateX(24px); }
-
-/* --- NOTIFIKASI MERAH --- */
-.alert-merah {
-    display: none; background-color: #ef4444; color: white;
-    padding: 10px; border-radius: 8px; text-align: center;
-    font-weight: bold; margin-bottom: 10px;
-    animation: kedip 1.5s infinite;
-}
-
-@keyframes putar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes kedip { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-
-/* --- KONTROL MANUAL RE-DESIGN --- */
-.panel-kontrol {
-    display: flex;
-    flex-direction: column;
-}
-.kontrol-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    padding: 15px 0;
-}
-.ikon-pompa {
-    background: #0f172a;
-    padding: 15px;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.kontrol-wrapper h3 {
-    margin: 0 0 5px 0;
-    font-size: 20px;
-    color: #ffffff;
-}
-.deskripsi-kontrol {
-    color: #94a3b8;
-    font-size: 13px;
-    margin-bottom: 25px;
-    text-align: center;
-    max-width: 80%;
-}
-.switch-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: #0f172a;
-    padding: 10px 20px;
-    border-radius: 50px;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
-}
-.label-off { color: #ef4444; font-weight: bold; font-size: 14px; }
-.label-on { color: #22c55e; font-weight: bold; font-size: 14px; }
-
-/* Memperbesar ukuran saklar khusus kontrol utama */
-.switch-besar { width: 60px; height: 30px; }
-.switch-besar .slider:before {
-    height: 22px; width: 22px;
-    left: 4px; bottom: 4px;
-}
-input:checked + .switch-besar .slider:before {
-    transform: translateX(30px);
-}
-
-/* --- INDIKATOR STATUS ONLINE/OFFLINE --- */
+/* =========================================
+   WATCHDOG STATUS ESP32
+========================================= */
 .status-koneksi {
     text-align: center;
-    margin-top: -20px;
+    margin-top: 5px;
     margin-bottom: 30px;
     font-size: 14px;
     font-weight: bold;
@@ -242,3 +45,175 @@ input:checked + .switch-besar .slider:before {
     box-shadow: 0 0 10px #ef4444;
     animation: kedip 1.5s infinite;
 }
+
+/* =========================================
+   GRID & CARD
+========================================= */
+.grid-container {
+    display: grid;
+    /* Grid akan otomatis menyesuaikan diri. 2 kolom di PC, 1 kolom di HP */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #1e2630;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+h2 {
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 0;
+}
+
+/* =========================================
+   TATA LETAK 2 KOLOM (Untuk Panel 1 & 2)
+========================================= */
+.flex-dua-kolom {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+}
+.item-tengah { text-align: center; }
+.label-kecil { color: #94a3b8; font-size: 14px; margin-top: 15px; font-weight: bold; }
+
+/* =========================================
+   TANGKI AIR (Diperkecil agar muat 2 kolom)
+========================================= */
+.tangki-air-kecil {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid #2cb1ff;
+    background-color: #0f172a;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 0 15px rgba(44, 177, 255, 0.2);
+}
+.persentase-kecil {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px; font-weight: bold;
+    z-index: 10; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.gelombang-air {
+    position: absolute;
+    width: 250%; height: 250%;
+    background-color: #2cb1ff; 
+    left: -75%; top: 100%;
+    border-radius: 40%;
+    animation: putar 5s infinite linear;
+    transition: top 1.5s ease-in-out;
+    z-index: 1;
+}
+.gelombang-air::before {
+    content: ""; position: absolute;
+    width: 100%; height: 100%;
+    background-color: rgba(44, 177, 255, 0.4);
+    left: 0; top: -15px;
+    border-radius: 42%;
+    animation: putar 7s infinite linear;
+}
+
+/* =========================================
+   TABUNG NUTRISI (Hijau)
+========================================= */
+.tabung-nutrisi {
+    width: 60px;
+    height: 130px;
+    background-color: #0f172a;
+    border: 4px solid #22c55e;
+    border-radius: 35px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+    margin: 0 auto;
+}
+.isi-nutrisi {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to top, #16a34a, #4ade80);
+    transition: height 1.5s ease-in-out;
+}
+.teks-nutrisi-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold; z-index: 2;
+    text-shadow: 1px 1px 3px black;
+    font-size: 16px;
+}
+
+/* =========================================
+   CINCIN PARAMETER (Suhu & TDS)
+========================================= */
+.cincin-suhu {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #0f172a;
+    border: 4px solid #facc15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px; font-weight: bold;
+    margin: 0 auto;
+}
+/* Pewarnaan Khusus Cincin */
+.cincin-suhu-air { border-color: #facc15; color: #facc15; box-shadow: 0 0 15px rgba(250, 204, 21, 0.2); }
+.cincin-tds { border-color: #a855f7; color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+.cincin-suhu .satuan { font-size: 18px; vertical-align: super; margin-left: 2px;}
+
+
+/* =========================================
+   KONTROL MANUAL (Grid 2 Pompa)
+========================================= */
+.panel-kontrol {
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+.kontrol-grid {
+    display: flex; justify-content: space-around; align-items: center; flex: 1; margin-top: 15px;
+}
+.kontrol-item {
+    display: flex; flex-direction: column; align-items: center; width: 45%;
+}
+.ikon-pompa {
+    background: #0f172a; padding: 12px; border-radius: 50%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;
+}
+.ikon-biru { box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
+.ikon-hijau { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); }
+.kontrol-item h3 { margin: 0 0 15px 0; font-size: 16px; color: #e2e8f0; text-align: center; }
+
+/* Switch Style */
+.switch-container {
+    display: flex; align-items: center; gap: 10px; background: #0f172a; padding: 8px 15px; border-radius: 50px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+.label-off { color: #ef4444; font-weight: bold; font-size: 12px; }
+.label-on { color: #22c55e; font-weight: bold; font-size: 12px; }
+.switch { position: relative; display: inline-block; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 34px;
+}
+.slider:before {
+    position: absolute; content: ""; background-color: white; transition: .4s; border-radius: 50%;
+}
+.switch-besar { width: 50px; height: 26px; }
+.switch-besar .slider:before { height: 18px; width: 18px; left: 4px; bottom: 4px; }
+input:checked + .switch-besar .slider { background-color: #00d2ff; }
+input:checked + .switch-besar .slider:before { transform: translateX(24px); }
+
+/* =========================================
+   ANIMASI KEYFRAMES
+========================================= */
+@keyframes putar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes kedip { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }

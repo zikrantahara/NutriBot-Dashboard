@@ -8,82 +8,99 @@
 </head>
 <body>
     <header>
-
         <h1>NUTRIBOT - DASHBOARD MONITORING</h1>
-        
         <!-- INDIKATOR STATUS ESP32 -->
         <div class="status-koneksi">
             <span id="indikator-status" class="dot-offline"></span>
             <span id="teks-status">Menunggu Koneksi ESP32...</span>
         </div>
-
     </header>
 
-    <main class="grid-container">
+<main class="grid-container">
         
-        <!-- PANEL 1: VOLUME AIR -->
+        <!-- PANEL 1: KAPASITAS WADAH -->
         <div class="card">
-            <h2>Volume Air</h2>
-            <div class="tangki-air">
-                <div class="gelombang-air" id="animasi-air"></div>
-                <div class="persentase" id="teks-volume-air">0%</div>
-            </div>
-        </div>
-
-        <!-- PANEL 2: NUTRISI & SUHU -->
-        <div class="card">
-            <h2>Parameter Nutrisi & Suhu</h2>
-            
-            <!-- Notifikasi Merah -->
-            <div id="notif-nutrisi" class="alert-merah">
-                ⚠️ PERINGATAN: Cairan Nutrisi Habis!
-            </div>
-
+            <h2>Kapasitas</h2>
             <div class="flex-dua-kolom">
-                <!-- Tabung Nutrisi -->
+                <!-- Tangki Air Utama -->
+                <div class="item-tengah">
+                    <div class="tangki-air-kecil">
+                        <div class="gelombang-air" id="animasi-air"></div>
+                        <div class="persentase-kecil" id="teks-volume-air">0%</div>
+                    </div>
+                    <p class="label-kecil">Wadah Air</p>
+                </div>
+
+                <!-- Tabung Nutrisi AB Mix -->
                 <div class="item-tengah">
                     <div class="tabung-nutrisi">
                         <div class="isi-nutrisi" id="animasi-nutrisi"></div>
-                        <div class="teks-nutrisi-center" id="teks-level-nutrisi">100%</div>
+                        <div class="teks-nutrisi-center" id="teks-level-nutrisi">0%</div>
                     </div>
-                    <p class="label-kecil">Level AB Mix</p>
-                </div>
-
-                <!-- Lingkaran Suhu -->
-                <div class="item-tengah">
-                    <div class="cincin-suhu">
-                        <span id="teks-suhu">28</span><span class="satuan">°C</span>
-                    </div>
-                    <p class="label-kecil">Suhu Air</p>
+                    <p class="label-kecil">Wadah Nutrisi</p>
                 </div>
             </div>
         </div>
 
-        <!-- PANEL 3: KONTROL MANUAL (RE-DESIGN) -->
+        <!-- PANEL 2: KONTROL MANUAL (2 POMPA) -->
         <div class="card panel-kontrol">
-            <h2>Kontrol Manual</h2>
-            <div class="kontrol-wrapper">
-                <div class="ikon-pompa">
-                    <!-- Ikon Tetesan Air / Pompa -->
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
-                    </svg>
-                </div>
-                <h3>Pompa AB Mix</h3>
-                <p class="deskripsi-kontrol">Kendali untuk aktuator nutrisi.</p>
+            <h2>Kontrol Manual Aktuator</h2>
+            <div class="kontrol-grid">
                 
-                <div class="switch-container">
-                    <span class="label-off">OFF</span>
-                    <label class="switch switch-besar">
-                        <input type="checkbox" id="pompa-ab">
-                        <span class="slider"></span>
-                    </label>
-                    <span class="label-on">ON</span>
+                <!-- Kontrol Pompa Air Utama -->
+                <div class="kontrol-item">
+                    <div class="ikon-pompa ikon-biru">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00d2ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                    </div>
+                    <h3>Pompa Air</h3>
+                    <div class="switch-container">
+                        <span class="label-off">OFF</span>
+                        <label class="switch switch-besar">
+                            <input type="checkbox" id="pompa-air">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="label-on">ON</span>
+                    </div>
+                </div>
+
+                <!-- Kontrol Pompa Nutrisi -->
+                <div class="kontrol-item">
+                    <div class="ikon-pompa ikon-hijau">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                        </svg>
+                    </div>
+                    <h3>Pompa Nutrisi</h3>
+                    <div class="switch-container">
+                        <span class="label-off">OFF</span>
+                        <label class="switch switch-besar">
+                            <input type="checkbox" id="pompa-ab">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="label-on">ON</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- PANEL 3: KUALITAS AIR (HANYA TDS) -->
+        <div class="card">
+            <h2>Parameter Kualitas Air</h2>
+            <div class="flex-dua-kolom">
+                <!-- Lingkaran TDS (Kepekatan) -->
+                <div class="item-tengah">
+                    <div class="cincin-suhu cincin-tds">
+                        <span id="teks-tds">0</span><span class="satuan">%</span>
+                    </div>
+                    <p class="label-kecil">Kepekatan (TDS)</p>
                 </div>
             </div>
         </div>
 
-        <!-- PANEL 4: GRAFIK pH -->
+        <!-- PANEL 4: GRAFIK pH (TERPISAH SENDIRI) -->
         <div class="card">
             <h2>Riwayat Parameter pH</h2>
             <canvas id="grafikRiwayat"></canvas>
@@ -96,8 +113,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
-    
-    <!-- Naikkan versi cache busting agar langsung berubah -->
-    <script src="app.js?v=4.0"></script>
+    <script src="app.js?v=5.0"></script>
 </body>
 </html>

@@ -103,8 +103,8 @@ db.ref('NutriBot_Node1/sensor_aktual/level_nutrisi_persen').on('value', (snapsho
     perbaruiStatusKoneksi(); // 👉 Pemicu Watchdog
 });
 
-db.ref('NutriBot_Node1/sensor_aktual/suhu_air').on('value', (snapshot) => {
-    document.getElementById('teks-suhu').innerText = snapshot.val() || 0;
+db.ref('NutriBot_Node1/sensor_aktual/tds').on('value', (snapshot) => {
+    document.getElementById('teks-tds').innerText = snapshot.val() || 0;
     
     perbaruiStatusKoneksi(); // 👉 Pemicu Watchdog
 });
@@ -140,6 +140,12 @@ function kendalikanPompa(topicMqtt, nodeFirebase, statusAktif) {
     db.ref('NutriBot_Node1/kontrol_sistem/mode_manual').set(true);
 }
 
+// Listener Pompa Nutrisi
 document.getElementById('pompa-ab').addEventListener('change', (e) => {
     kendalikanPompa("nutribot/kontrol/pompa_ab", "pompa_AB_Mix", e.target.checked);
+});
+
+// Listener Pompa Air Utama
+document.getElementById('pompa-air').addEventListener('change', (e) => {
+    kendalikanPompa("nutribot/kontrol/pompa_air", "pompa_Air", e.target.checked);
 });
