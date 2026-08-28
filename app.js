@@ -87,6 +87,9 @@ db.ref('NutriBot_Node1/sensor_aktual/volume_air_persen').on('value', (snapshot) 
     const val = snapshot.val() || 0;
     document.getElementById('teks-volume-air').innerText = val + '%';
     document.getElementById('animasi-air').style.top = (100 - val) + '%';
+
+    const notifAir = document.getElementById('notif-air');
+    if(notifAir) notifAir.style.display = val < 20 ? 'block' : 'none';
     
     perbaruiStatusKoneksi(); // 👉 Pemicu Watchdog
 });
