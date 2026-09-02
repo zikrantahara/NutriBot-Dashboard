@@ -1,219 +1,442 @@
-/* =========================================
-   DASAR & TIPOGRAFI
-========================================= */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #12181f;
-    color: #ffffff;
+/* ==========================================================================
+   NUTRIBOT DASHBOARD - INDUSTRIAL SLATE THEME
+   ========================================================================== */
+
+:root {
+    --bg-body: #0b0f17;
+    --bg-surface: #131b27;
+    --bg-surface-hover: #182232;
+    --bg-subtle: #1c2738;
+    
+    --border-color: rgba(255, 255, 255, 0.07);
+    --border-hover: rgba(255, 255, 255, 0.15);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --accent-blue: #38bdf8;
+    --accent-blue-soft: rgba(56, 189, 248, 0.1);
+    --accent-green: #22c55e;
+    --accent-green-soft: rgba(34, 197, 94, 0.1);
+    --accent-purple: #a855f7;
+    --accent-red: #ef4444;
+    
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    
+    --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* BASE STYLES */
+* {
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
-header h1 {
-    text-align: center;
-    color: #00d2ff;
-    margin-bottom: 10px;
+body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 40px;
 }
 
-/* =========================================
-   WATCHDOG STATUS ESP32
-========================================= */
-.status-koneksi {
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #94a3b8;
+/* HEADER & NAVBAR */
+.app-header {
+    background-color: rgba(19, 27, 39, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 14px 24px;
+}
+
+.header-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--accent-blue), #0284c7);
+    color: #fff;
+    border-radius: var(--radius-sm);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-}
-.dot-online {
-    height: 12px; width: 12px;
-    background-color: #22c55e;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 10px #22c55e;
-}
-.dot-offline {
-    height: 12px; width: 12px;
-    background-color: #ef4444;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 10px #ef4444;
-    animation: kedip 1.5s infinite;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
 }
 
-/* =========================================
-   GRID & CARD
-========================================= */
-.grid-container {
+.brand-text h1 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--text-primary);
+}
+
+.system-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    display: block;
+    font-weight: 500;
+}
+
+/* ESP32 WATCHDOG BADGE */
+.status-badge {
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+}
+
+.dot-online {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-green);
+}
+
+.dot-offline {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-red);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+}
+
+/* LAYOUT CONTAINER */
+.dashboard-container {
+    max-width: 1280px;
+    margin: 28px auto 0;
+    padding: 0 24px;
+}
+
+.grid-layout {
     display: grid;
-    /* Grid akan otomatis menyesuaikan diri. 2 kolom di PC, 1 kolom di HP */
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 20px;
 }
 
+/* CARDS */
 .card {
-    background-color: #1e2630;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
 }
 
-h2 {
-    border-bottom: 1px solid #334155;
-    padding-bottom: 10px;
-    font-size: 18px;
-    text-align: center;
-    margin-top: 0;
+.card:hover {
+    border-color: var(--border-hover);
 }
 
-/* =========================================
-   TATA LETAK 2 KOLOM (Untuk Panel 1 & 2)
-========================================= */
-.flex-dua-kolom {
+.card-wide {
+    grid-column: 1 / -1;
+}
+
+.card-header {
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.card-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+}
+
+/* ALERTS */
+.alert-banner {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
-    margin-top: 20px;
-}
-.item-tengah { text-align: center; }
-.label-kecil { color: #94a3b8; font-size: 14px; margin-top: 15px; font-weight: bold; }
-
-/* =========================================
-   TANGKI AIR (Diperkecil agar muat 2 kolom)
-========================================= */
-.tangki-air-kecil {
-    position: relative;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    border: 5px solid #2cb1ff;
-    background-color: #0f172a;
-    overflow: hidden;
-    margin: 0 auto;
-    box-shadow: 0 0 15px rgba(44, 177, 255, 0.2);
-}
-.persentase-kecil {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 32px; font-weight: bold;
-    z-index: 10; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-.gelombang-air {
-    position: absolute;
-    width: 250%; height: 250%;
-    background-color: #2cb1ff; 
-    left: -75%; top: 100%;
-    border-radius: 40%;
-    animation: putar 5s infinite linear;
-    transition: top 1.5s ease-in-out;
-    z-index: 1;
-}
-.gelombang-air::before {
-    content: ""; position: absolute;
-    width: 100%; height: 100%;
-    background-color: rgba(44, 177, 255, 0.4);
-    left: 0; top: -15px;
-    border-radius: 42%;
-    animation: putar 7s infinite linear;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
 }
 
-/* =========================================
-   TABUNG NUTRISI (Hijau)
-========================================= */
-.tabung-nutrisi {
-    width: 60px;
-    height: 130px;
-    background-color: #0f172a;
-    border: 4px solid #22c55e;
-    border-radius: 35px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
-    margin: 0 auto;
-}
-.isi-nutrisi {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(to top, #16a34a, #4ade80);
-    transition: height 1.5s ease-in-out;
-}
-.teks-nutrisi-center {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold; z-index: 2;
-    text-shadow: 1px 1px 3px black;
-    font-size: 16px;
+.alert-warning, .alert-danger {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
 }
 
-/* =========================================
-   CINCIN PARAMETER (Suhu & TDS)
-========================================= */
-.cincin-suhu {
+/* PANEL 1: TANK VISUALIZATION */
+.tank-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding-top: 10px;
+}
+
+.tank-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Circular Tank (Water) */
+.circular-tank {
     width: 110px;
     height: 110px;
     border-radius: 50%;
-    background: #0f172a;
-    border: 4px solid #facc15;
+    border: 3px solid rgba(56, 189, 248, 0.3);
+    background-color: var(--bg-body);
+    position: relative;
+    overflow: hidden;
+}
+
+.water-liquid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.4), var(--accent-blue));
+    top: 100%;
+    left: 0;
+    transition: top 1s ease-in-out;
+}
+
+.tank-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-weight: 700;
+    z-index: 2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+/* Tube Tank (Nutrients) */
+.tube-tank {
+    width: 54px;
+    height: 110px;
+    border-radius: 28px;
+    border: 3px solid rgba(34, 197, 94, 0.3);
+    background-color: var(--bg-body);
+    position: relative;
+    overflow: hidden;
+}
+
+.nutrient-liquid {
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(0deg, #15803d, var(--accent-green));
+    transition: height 1s ease-in-out;
+}
+
+.tank-value-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: 700;
+    z-index: 2;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+
+.tank-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* PANEL 2: MANUAL CONTROLS */
+.control-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.control-card {
+    background-color: var(--bg-body);
+    border: 1px solid var(--border-color);
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.control-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px; font-weight: bold;
-    margin: 0 auto;
 }
-/* Pewarnaan Khusus Cincin */
-.cincin-suhu-air { border-color: #facc15; color: #facc15; box-shadow: 0 0 15px rgba(250, 204, 21, 0.2); }
-.cincin-tds { border-color: #a855f7; color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
-.cincin-suhu .satuan { font-size: 18px; vertical-align: super; margin-left: 2px;}
 
-/* =========================================
-   KONTROL MANUAL (Grid 2 Pompa)
-========================================= */
-.panel-kontrol {
-    display: flex; flex-direction: column; justify-content: space-between;
+.icon-water {
+    background-color: var(--accent-blue-soft);
+    color: var(--accent-blue);
 }
-.kontrol-grid {
-    display: flex; justify-content: space-around; align-items: center; flex: 1; margin-top: 15px;
-}
-.kontrol-item {
-    display: flex; flex-direction: column; align-items: center; width: 45%;
-}
-.ikon-pompa {
-    background: #0f172a; padding: 12px; border-radius: 50%; margin-bottom: 10px; display: flex; align-items: center; justify-content: center;
-}
-.ikon-biru { box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
-.ikon-hijau { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); }
-.kontrol-item h3 { margin: 0 0 15px 0; font-size: 16px; color: #e2e8f0; text-align: center; }
 
-/* Switch Style */
-.switch-container {
-    display: flex; align-items: center; gap: 10px; background: #0f172a; padding: 8px 15px; border-radius: 50px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+.icon-nutrient {
+    background-color: var(--accent-green-soft);
+    color: var(--accent-green);
 }
-.label-off { color: #ef4444; font-weight: bold; font-size: 12px; }
-.label-on { color: #22c55e; font-weight: bold; font-size: 12px; }
-.switch { position: relative; display: inline-block; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider {
-    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #334155; transition: .4s; border-radius: 34px;
-}
-.slider:before {
-    position: absolute; content: ""; background-color: white; transition: .4s; border-radius: 50%;
-}
-.switch-besar { width: 50px; height: 26px; }
-.switch-besar .slider:before { height: 18px; width: 18px; left: 4px; bottom: 4px; }
 
-input:checked + .slider { background-color: #00d2ff; }
-input:checked + .slider:before { transform: translateX(24px); }
+.control-info h3 {
+    font-size: 13px;
+    font-weight: 600;
+}
 
-/* =========================================
-   ANIMASI KEYFRAMES
-========================================= */
-@keyframes putar { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-@keyframes kedip { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+.control-info p {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* Modern Switch Toggle */
+.switch-toggle {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    display: inline-block;
+}
+
+.switch-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #334155;
+    transition: .3s;
+    border-radius: 24px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: var(--accent-blue);
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* PANEL 3: TDS KPI CARD */
+.kpi-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+}
+
+.kpi-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 3px solid rgba(168, 85, 247, 0.25);
+    background-color: var(--bg-body);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.kpi-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent-purple);
+}
+
+.kpi-unit {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-left: 2px;
+    font-weight: 600;
+}
+
+.kpi-status-tag {
+    font-size: 11px;
+    color: var(--text-muted);
+    background-color: var(--bg-body);
+    padding: 4px 10px;
+    border-radius: 99px;
+    border: 1px solid var(--border-color);
+}
+
+/* PANEL 4: CHART WRAPPER */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 260px;
+}
+
+/* ANIMATIONS */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 640px) {
+    .dashboard-container {
+        padding: 0 16px;
+        margin-top: 16px;
+    }
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+}
